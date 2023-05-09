@@ -5,7 +5,9 @@
         <h3 class="mb-0">Editar Perfil</h3>
       </b-col>
       <b-col cols="4" class="text-right">
-        <a href="#!" class="btn btn-sm btn-primary">Salvar</a>
+        <a href="#!" class="btn btn-sm btn-primary" @click="updateProfile"
+          >Salvar</a
+        >
       </b-col>
     </b-row>
 
@@ -17,13 +19,23 @@
           <b-col lg="6">
             <base-input
               type="text"
+              label="Codigo"
+              placeholder="Codigo"
+              v-model="currentUser.codigo"
+              readonly
+            >
+            </base-input>
+          </b-col>
+          <b-col lg="6">
+            <base-input
+              type="text"
               label="Nome"
               placeholder="Nome"
               v-model="currentUser.nome"
             >
             </base-input>
           </b-col>
-          <b-col lg="6">
+          <b-col lg="12">
             <base-input
               type="email"
               label="Email"
@@ -36,8 +48,8 @@
 
         <b-row>
           <b-col lg="6">
-            <base-input label="Tipo de usuário" v-model="currentUser.tipo">
-              <select class="form-control">
+            <base-input label="Tipo de usuário">
+              <select class="form-control" v-model="currentUser.tipo">
                 <option value="0">Vendedor</option>
                 <option value="1">Supervisor</option>
               </select>
@@ -89,7 +101,8 @@ export default {
 
   methods: {
     updateProfile() {
-      alert("Your data: " + JSON.stringify(this.currentUser));
+      alert("Função não implementada");
+      console.log(this.currentUser);
     },
   },
 };

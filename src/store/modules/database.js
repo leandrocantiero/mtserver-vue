@@ -18,12 +18,22 @@ const mutations = make.mutations(state)
 
 const actions = {
     save({ state, dispatch }, database) {
-        console.log(database)
         state.loading = true
         return axios.post(`${API_URL}/Database/Set`, database)
             .then(res => {
                 dispatch('get')
                 showSuccess("Conexão salva com sucesso!");
+            })
+            .catch(showError)
+            .finally(() => setTimeout(() => { state.loading = false }, 400))
+    },
+
+    create({ state, dispatch }, database) {
+        state.loading = true
+        return axios.post(`${API_URL}/Database/Create`, database)
+            .then(res => {
+                dispatch('get')
+                showSuccess("Base de dados criada com sucesso!");
             })
             .catch(showError)
             .finally(() => setTimeout(() => { state.loading = false }, 400))
@@ -37,9 +47,7 @@ const actions = {
 
                 if (!res.data) {
                     showError('Não existe uma configuração com o banco, realize uma para continuar')
-                } else {
-                    showSuccess("Conexão carregada com sucesso!")
-                }
+                } 
             })
             .catch(showError)
             .finally(() => setTimeout(() => { state.loading = false }, 400))

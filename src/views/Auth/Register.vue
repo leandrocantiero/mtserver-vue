@@ -8,8 +8,9 @@
             <b-col xl="5" lg="6" md="8" class="px-5">
               <h1 class="text-white">Bem-vindo!</h1>
               <p class="text-lead text-white">
-                Utilize o formulário abaixo para realizar login no sistema. Caso
-                não possua login, clique em criar conta.
+                Utilize o formulário abaixo para realizar seu cadastro no
+                sistema. Certifique-se de já ter uma conexão com a base de
+                dados!
               </p>
             </b-col>
           </b-row>
@@ -39,7 +40,7 @@
           <b-card no-body class="bg-secondary border-0 mb-0">
             <b-card-body class="px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">
-                <small>Login</small>
+                <small>Registro</small>
               </div>
 
               <validation-observer
@@ -50,11 +51,9 @@
                   <base-input
                     alternative
                     class="mb-3"
-                    name="Código"
                     type="number"
-                    :rules="{ required: true }"
                     prepend-icon="fa fa-hashtag"
-                    placeholder="Código"
+                    placeholder="Código (O sistema gerará caso vazio)"
                     v-model="user.codigo"
                   >
                   </base-input>
@@ -62,7 +61,32 @@
                   <base-input
                     alternative
                     class="mb-3"
-                    name="Password"
+                    type="text"
+                    :rules="{ required: true }"
+                    prepend-icon="fa fa-user"
+                    placeholder="Nome"
+                    v-model="user.nome"
+                  >
+                  </base-input>
+
+                  <base-input
+                    alternative
+                    class="mb-3"
+                    type="email"
+                    :rules="{ required: true }"
+                    prepend-icon="fa fa-mail"
+                    placeholder="E-mail"
+                    v-model="user.email"
+                  >
+                  </base-input>
+
+                  <base-input
+                    alternative
+                    class="mb-3"
+                    :rules="{
+                      required: true,
+                      min: 6,
+                    }"
                     prepend-icon="ni ni-lock-circle-open"
                     type="password"
                     placeholder="Senha"
@@ -70,13 +94,19 @@
                   >
                   </base-input>
 
-                  <div class="text-center text-muted">
-                    <span v-if="userAdded" class="text-danger"
-                      >Atenção! Seu código para login é:{{
-                        userAdded.codigo
-                      }}</span
-                    >
-                  </div>
+                  <base-input
+                    alternative
+                    class="mb-3"
+                    :rules="{
+                      required: true,
+                      min: 6,
+                    }"
+                    prepend-icon="ni ni-lock-circle-open"
+                    type="password"
+                    placeholder="Confirme sua senha"
+                    v-model="user.confirmaSenha"
+                  >
+                  </base-input>
 
                   <div class="text-center">
                     <base-button
@@ -115,12 +145,6 @@ import { sync } from "vuex-pathify";
 export default {
   computed: {
     ...sync("authStore", ["loading"]),
-
-    userAdded: {
-      get() {
-        return this.$route.params.user;
-      },
-    },
   },
 
   data: () => ({
@@ -129,15 +153,8 @@ export default {
 
   methods: {
     onSubmit() {
-      this.$store.dispatch("authStore/login", this.user);
+      this.$store.dispatch("authStore/register", this.user);
     },
-  },
-
-  mounted() {
-    if (this.userAdded) {
-      this.$set(this.user, "codigo", this.userAdded.codigo);
-      this.$set(this.user, "senha", this.userAdded.senha);
-    }
   },
 };
 </script>

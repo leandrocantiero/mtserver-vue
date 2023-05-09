@@ -49,7 +49,7 @@ const actions = {
         return axios
             .post(`${API_URL}/Auth/SignUp`, user)
             .then((res) => {
-                router.push({ name: 'Login', params: user })
+                router.push({ name: 'login', params: { user: res.data } })
                 showSuccess("Registro concluído com sucesso");
             })
             .catch(showError)

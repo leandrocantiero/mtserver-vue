@@ -6,7 +6,7 @@
         <b-btn class="btn-info btn-sm" v-if="configIsEmpty" @click="loadConfig">
           Carregar
         </b-btn>
-        <b-btn class="btn-info btn-sm">Criar</b-btn>
+        <b-btn class="btn-info btn-sm" @click="create">Criar</b-btn>
         <b-btn class="btn-success btn-sm" @click="save">Salvar</b-btn>
       </b-col>
     </b-row>
@@ -101,6 +101,7 @@
 
 <script>
 import { sync } from "vuex-pathify";
+import { showError } from "@/util/helpers";
 
 export default {
   computed: {
@@ -141,8 +142,40 @@ export default {
       this.$store.dispatch("databaseStore/get");
     },
 
+    validate() {
+      if (!this.config.host) {
+        showError("Informe o endereço do servidor");
+        return false;
+      }
+
+      if (!this.config.databaseName) {
+        showError("Informe o nome da base de dados");
+        return false;
+      }
+
+      if (!this.config.user) {
+        showError("Informe o usuário para acesso");
+        return false;
+      }
+
+      if (!this.config.password) {
+        showError("Informe a senha para acesso");
+        return false;
+      }
+
+      return true;
+    },
+
     save() {
+      if (!this.validate()) return;
+
       this.$store.dispatch("databaseStore/save", this.config);
+    },
+
+    create() {
+      if (!this.validate()) return;
+
+      this.$store.dispatch("databaseStore/create", this.config);
     },
   },
 

@@ -11,9 +11,12 @@
     <div class="container-fluid">
       <navbar-toggle-button @click.native="showSidebar"> </navbar-toggle-button>
 
-      <router-link class="navbar-brand" to="/">
-        <img :src="logo" class="navbar-brand-img" alt="..." />
-      </router-link>
+      <img
+        style="aspect-ratio: 8/8"
+        :src="logo"
+        class="navbar-brand p-0"
+        alt="..."
+      />
 
       <slot name="mobile-right">
         <ul class="nav align-items-center d-md-none">
@@ -164,7 +167,7 @@ export default {
   props: {
     logo: {
       type: String,
-      default: "img/brand/green.png",
+      default: "img/brand/logo-green.png",
       description: "Sidebar app logo",
     },
     autoClose: {

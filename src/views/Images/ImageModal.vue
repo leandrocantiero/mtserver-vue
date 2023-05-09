@@ -1,15 +1,18 @@
 <template>
   <b-modal v-model="modal" title="Adicionar imagens" size="lg">
-    <b-row class="mb-1">
-      <b-form-file
-        v-model="files"
-        :state="Boolean(files)"
-        multiple
-        accept="image/*"
-        placeholder="Clique para selecionar as imagens ou arraste-as para cá"
-        drop-placeholder="Solte aqui..."
-      ></b-form-file>
-    </b-row>
+    <div>
+      <b-row class="mb-1">
+        <b-form-file
+          v-model="files"
+          :state="Boolean(files)"
+          multiple
+          accept="image/*"
+          :file-name-formatter="formatNames"
+          placeholder="Clique para selecionar as imagens ou arraste-as para cá"
+          drop-placeholder="Solte aqui..."
+        ></b-form-file>
+      </b-row>
+    </div>
 
     <template #modal-footer>
       <b-row class="justify-content-end">
@@ -40,6 +43,10 @@ export default {
   }),
 
   methods: {
+    formatNames(files) {
+      return `${files.length} arquivos selecionados`
+    },
+
     save() {
       if (this.files.length == 0)
         showError("Informe algumas imagens para continuar");

@@ -8,8 +8,11 @@
       expand="lg"
     >
       <div slot="brand" class="navbar-wrapper">
-        <b-navbar-brand to="/">
-          <img src="img/brand/white.png" />
+        <b-navbar-brand>
+          <img
+            style="width: 125px; height: 125px"
+            src="img/brand/logo-white.png"
+          />
         </b-navbar-brand>
       </div>
 
@@ -17,8 +20,11 @@
         <div class="navbar-collapse-header">
           <b-row>
             <b-col cols="6" class="collapse-brand">
-              <router-link to="/">
-                <img src="img/brand/green.png" />
+              <router-link to="/login">
+                <img
+                  style="width: 125px; height: 125px"
+                  src="img/brand/logo-green.png"
+                />
               </router-link>
             </b-col>
             <b-col cols="6" class="collapse-close">
@@ -42,6 +48,10 @@
           <b-nav-item to="/login">
             <i class="fa fa-door-open"></i>
             <span class="nav-link-inner--text">Login</span>
+          </b-nav-item>
+          <b-nav-item to="/register">
+            <i class="fa fa-user"></i>
+            <span class="nav-link-inner--text">Registro</span>
           </b-nav-item>
         </b-navbar-nav>
       </template>
