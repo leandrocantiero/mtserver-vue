@@ -158,11 +158,6 @@ export default {
         return false;
       }
 
-      if (!this.config.password) {
-        showError("Informe a senha para acesso");
-        return false;
-      }
-
       return true;
     },
 
