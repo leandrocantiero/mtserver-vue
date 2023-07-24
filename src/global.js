@@ -6,7 +6,7 @@ const IS_PROD = process.env.NODE_ENV === 'production'
 const USER_KEY = 'ALO47@#369QADB20%-'
 const COMPANY_KEY = 'DAS668!@#DAS)(!@$A'
 
-const API_URL = IS_PROD ? 'http://localhost:8085' : 'http://localhost:25505'
+const API_URL = IS_PROD ? 'https://mtserver-api.onrender.com' : 'http://localhost:25505'
 
 console.log(API_URL)
 
